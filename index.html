@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multirich Resources | Website Premium SME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#080a10;
+  --navy:#0e1628;
+  --gold:#d4a84f;
+  --gold2:#f0d28a;
+  --cream:#fff8ec;
+  --soft:#f6efe4;
+  --green:#25d366;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--cream);color:#141414;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%}
+.container{width:min(1160px,91%);margin:auto}
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:50;
+  background:rgba(8,10,16,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(212,168,79,.22);
+}
+.nav-inner{height:80px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{color:#fff}
+.logo strong{font-family:"Playfair Display",serif;font-size:30px;letter-spacing:1px;display:block;line-height:1}
+.logo span{display:block;color:var(--gold2);font-size:10px;font-weight:900;letter-spacing:2.4px;margin-top:5px}
+.menu{display:flex;gap:30px;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase}
+.menu a:first-child{color:var(--gold2)}
+.nav-cta,.btn-green{background:var(--green);color:#fff}
+.nav-cta{padding:14px 22px;border-radius:999px;font-size:13px;font-weight:900;text-transform:uppercase}
+
+.hero{
+  min-height:780px;
+  background:
+    linear-gradient(90deg,rgba(5,7,13,.92) 0%,rgba(8,10,16,.78) 40%,rgba(8,10,16,.08) 100%),
+    url("assets/hero.webp") 72% center/cover no-repeat;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  padding-top:80px;
+}
+.hero-copy{max-width:600px}
+.badge{display:inline-flex;background:rgba(212,168,79,.13);border:1px solid rgba(212,168,79,.4);color:var(--gold2);padding:10px 15px;border-radius:999px;font-size:13px;font-weight:900;margin-bottom:24px}
+h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-2px;margin-bottom:24px}
+.hero p{font-size:18px;line-height:1.75;color:#e8dfd0;max-width:600px;margin-bottom:32px}
+.actions{display:flex;gap:15px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:999px;font-size:14px;font-weight:900;text-transform:uppercase}
+.btn-gold{background:linear-gradient(135deg,#c9973d,#f0d28a);color:#101010}
+.btn-outline{border:1px solid rgba(240,210,138,.65);color:#fff;background:rgba(255,255,255,.04)}
+
+.section{padding:82px 0}
+.center{text-align:center}
+.kicker{color:#9a6b20;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.title{font-family:"Playfair Display",serif;font-size:clamp(36px,5vw,58px);line-height:1.05;margin-bottom:18px}
+.lead{max-width:720px;margin:0 auto;color:#4d4d4d;line-height:1.8;font-size:17px}
+
+.problem{background:#fff}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}
+.problem-card,.feature-card,.price-card,.step-card,.portfolio-card{background:#fff;border:1px solid #eadfcd;border-radius:22px;padding:26px;box-shadow:0 14px 34px rgba(30,18,6,.06)}
+.problem-card h3,.feature-card h3{font-size:18px;margin-bottom:10px}
+.problem-card p,.feature-card p,.step-card p{font-size:14px;color:#555;line-height:1.7}
+
+.features{background:var(--soft)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}
+.icon{font-size:30px;margin-bottom:14px}
+
+.portfolio{background:#fff}
+.showcase{
+  margin-top:42px;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid #eadfcd;
+  box-shadow:0 18px 44px rgba(30,18,6,.12);
+}
+.button-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.view{display:inline-flex;background:#0e1628;color:#fff;padding:13px 18px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase}
+
+.project-links{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:30px;
+}
+.project-card{
+  background:#fff;
+  border:1px solid #eadfcd;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 12px 30px rgba(30,18,6,.06);
+}
+.project-card h3{font-size:18px;margin-bottom:8px}
+.project-card p{font-size:13px;color:#555;line-height:1.6;margin-bottom:14px}
+
+.pricing{background:linear-gradient(135deg,#080a10,#0e1628);color:#fff}
+.price-card{background:rgba(255,255,255,.06);border:1px solid rgba(212,168,79,.35);max-width:620px;margin:42px auto 0;text-align:center;color:#fff}
+.price{font-family:"Playfair Display",serif;font-size:76px;color:var(--gold2);line-height:1;margin:18px 0}
+.includes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0;text-align:left}
+.includes div{background:rgba(255,255,255,.07);padding:14px;border-radius:12px;font-size:14px;color:#f3eadc}
+.domain{background:rgba(212,168,79,.13);border:1px solid rgba(212,168,79,.35);padding:16px;border-radius:14px;margin-bottom:24px;color:#f4dfb2}
+
+.process{background:#fff}
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}
+.step-no{width:42px;height:42px;border-radius:50%;background:#0e1628;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:16px}
+
+.cta{background:#fff8ec;padding:72px 0}
+.cta-box{background:linear-gradient(135deg,#0e1628,#080a10);color:#fff;border-radius:30px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.cta-box h2{font-family:"Playfair Display",serif;font-size:42px;line-height:1.05;margin-bottom:12px}
+.cta-box p{color:#e8dfd0;line-height:1.7}
+.footer{background:#07080c;color:#d8c7aa;padding:32px 0;text-align:center;font-size:13px}
+.float-wa{position:fixed;right:18px;bottom:18px;background:#25d366;color:#fff;padding:16px 24px;border-radius:999px;font-weight:900;z-index:80;box-shadow:0 14px 35px rgba(0,0,0,.25)}
+
+@media(max-width:1050px){
+  .project-links,.problem-grid,.step-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid{grid-template-columns:1fr 1fr}
+  .menu{display:none}
+}
+@media(max-width:640px){
+  .nav{position:sticky;background:#080a10}
+  .nav-inner{height:88px}
+  .logo strong{font-size:25px}
+  .logo span{font-size:8px}
+  .nav-cta{padding:13px 15px;font-size:12px}
+  .hero{
+    min-height:auto;
+    padding:58px 0 300px;
+    background:
+      linear-gradient(180deg,rgba(5,7,13,.94) 0%,rgba(8,10,16,.82) 42%,rgba(8,10,16,.18) 100%),
+      url("assets/hero.webp") 72% bottom/cover no-repeat;
+  }
+  .hero p{font-size:16px}
+  .actions{flex-direction:column;align-items:flex-start}
+  .btn{min-width:250px}
+  .project-links,.problem-grid,.feature-grid,.step-grid,.includes{grid-template-columns:1fr}
+  .section{padding:62px 0}
+  .price{font-size:62px}
+  .cta-box{grid-template-columns:1fr;padding:34px}
+  .cta-box h2{font-size:34px}
+  .float-wa{left:20px;right:20px;text-align:center;bottom:14px;padding:14px 18px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#"><strong>MULTIRICH</strong><span>RESOURCES</span></a>
+    <div class="menu">
+      <a href="#">Home</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#harga">Harga</a>
+      <a href="#proses">Proses</a>
+    </div>
+    <a class="nav-cta" href="https://wa.me/601156589986">WhatsApp</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <div class="badge">Website Premium Untuk SME</div>
+      <h1>Website Bisnes Nampak Mahal, Harga Mampu Milik.</h1>
+      <p>Kami bantu bisnes kecil ada website rasmi yang kemas, mobile friendly, siap WhatsApp button, Google Maps dan portfolio servis.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#portfolio">Lihat Contoh Website</a>
+        <a class="btn btn-outline" href="https://wa.me/601156589986">WhatsApp Sekarang</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section problem">
+  <div class="container">
+    <div class="center">
+      <div class="kicker">Kenapa Perlu Website</div>
+      <h2 class="title">Website sekarang ialah identiti bisnes.</h2>
+      <p class="lead">Website bukan semata-mata untuk jual online. Website buat bisnes nampak lebih professional, senang share info, dan lebih dipercayai pelanggan.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card"><h3>Lebih Trusted</h3><p>Customer lebih yakin bila bisnes ada website rasmi.</p></div>
+      <div class="problem-card"><h3>Info Lebih Kemas</h3><p>Produk, servis, lokasi dan contact tersusun dalam satu link.</p></div>
+      <div class="problem-card"><h3>Mudah Share</h3><p>Share satu link sahaja untuk customer tengok semua maklumat.</p></div>
+      <div class="problem-card"><h3>Nampak Serius</h3><p>Bisnes nampak lebih bersedia dan professional.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section features">
+  <div class="container">
+    <div class="center">
+      <div class="kicker">Apa Yang Anda Dapat</div>
+      <h2 class="title">Semua asas penting sudah termasuk.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="icon">📱</div><h3>Mobile Friendly</h3><p>Website disusun supaya sedap dilihat di telefon.</p></div>
+      <div class="feature-card"><div class="icon">💬</div><h3>WhatsApp Button</h3><p>Customer terus boleh klik untuk hubungi anda.</p></div>
+      <div class="feature-card"><div class="icon">📍</div><h3>Google Maps</h3><p>Lokasi bisnes dimasukkan untuk mudahkan pelanggan.</p></div>
+      <div class="feature-card"><div class="icon">🎨</div><h3>Design Premium</h3><p>Visual clean dan nampak lebih mahal dari harga.</p></div>
+      <div class="feature-card"><div class="icon">🖼️</div><h3>Gambar AI Professional</h3><p>Sesuai untuk bisnes yang belum ada gambar cantik.</p></div>
+      <div class="feature-card"><div class="icon">🛠️</div><h3>Maintenance 1 Bulan</h3><p>Free update kecil dalam tempoh 1 bulan pertama.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="section portfolio">
+  <div class="container">
+    <div class="center">
+      <div class="kicker">Portfolio Demo</div>
+      <h2 class="title">Contoh website SME yang sudah siap.</h2>
+      <p class="lead">Cafe, spa, perfume dan produk makanan. Semua contoh ini boleh dibuka sebagai demo live.</p>
+    </div>
+
+    <div class="showcase">
+      <img src="assets/demo-grid.webp" alt="Contoh website SME">
+    </div>
+
+    <div class="button-row">
+      <a class="view" href="https://multirichresources.github.io/noircoffee/" target="_blank">Noir Coffee</a>
+      <a class="view" href="https://multirichresources.github.io/zahraperfume/" target="_blank">Zahra Perfume</a>
+      <a class="view" href="https://multirichresources.github.io/aureliaspa/" target="_blank">Aurelia Spa</a>
+      <a class="view" href="https://multirichresources.github.io/ainahomemadesambal/" target="_blank">Aina Sambal</a>
+    </div>
+
+    <div style="height:70px"></div>
+
+    <div class="center">
+      <div class="kicker">Projek Website Kursus</div>
+      <h2 class="title">Website sebenar untuk akademi & kursus.</h2>
+      <p class="lead">Contoh projek website latihan, kursus dan platform akademi.</p>
+    </div>
+
+    <div class="showcase">
+      <img src="assets/coe-grid.webp" alt="Contoh website kursus COE">
+    </div>
+
+    <div class="button-row">
+      <a class="view" href="https://akademicoe.info" target="_blank">akademicoe.info</a>
+      <a class="view" href="https://academycoe.com" target="_blank">academycoe.com</a>
+      <a class="view" href="https://coecourse.com" target="_blank">coecourse.com</a>
+    </div>
+  </div>
+</section>
+
+<section id="harga" class="section pricing">
+  <div class="container">
+    <div class="center">
+      <div class="kicker">Harga</div>
+      <h2 class="title">Pakej Website Premium SME</h2>
+      <p class="lead" style="color:#e8dfd0">Sesuai untuk bisnes kecil yang mahu nampak lebih professional tanpa bayar ribuan ringgit.</p>
+    </div>
+    <div class="price-card">
+      <div>Pakej bermula dari</div>
+      <div class="price">RM399</div>
+      <div class="domain">Custom domain .my / .com / .net: +RM50/tahun</div>
+      <div class="includes">
+        <div>✅ 1 page premium website</div>
+        <div>✅ Mobile friendly</div>
+        <div>✅ WhatsApp button</div>
+        <div>✅ Google Maps</div>
+        <div>✅ Social media link</div>
+        <div>✅ Free maintenance 1 bulan</div>
+      </div>
+      <a class="btn btn-green" href="https://wa.me/601156589986">Saya Nak Website</a>
+    </div>
+  </div>
+</section>
+
+<section id="proses" class="section process">
+  <div class="container">
+    <div class="center">
+      <div class="kicker">Cara Kerja</div>
+      <h2 class="title">Proses mudah sampai siap.</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step-card"><div class="step-no">1</div><h3>Beri Info Bisnes</h3><p>Nama bisnes, servis, produk, lokasi dan WhatsApp.</p></div>
+      <div class="step-card"><div class="step-no">2</div><h3>Kami Design</h3><p>Kami susun website dan visual ikut niche bisnes.</p></div>
+      <div class="step-card"><div class="step-no">3</div><h3>Review</h3><p>Anda semak dan beri feedback ringkas.</p></div>
+      <div class="step-card"><div class="step-no">4</div><h3>Publish</h3><p>Website live dan link boleh terus share.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div>
+        <h2>Nak bisnes anda nampak lebih professional?</h2>
+        <p>WhatsApp Multirich Resources sekarang dan kami bantu cadangkan layout website yang sesuai untuk bisnes anda.</p>
+      </div>
+      <a class="btn btn-gold" href="https://wa.me/601156589986">WhatsApp 011-5658 9986</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">© 2026 Multirich Resources. Website Premium SME.</footer>
+<a class="float-wa" href="https://wa.me/601156589986">WhatsApp Sekarang</a>
+
+</body>
+</html>
