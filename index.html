@@ -86,6 +86,21 @@ h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-heig
   box-shadow:0 18px 44px rgba(30,18,6,.12);
 }
 .button-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+
+.mobile-portfolio{display:none}
+.mobile-card{
+  background:#fff;
+  border:1px solid #eadfcd;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 44px rgba(30,18,6,.10);
+  margin-top:22px;
+}
+.mobile-card img{width:100%;display:block}
+.mobile-card-body{padding:20px;text-align:center}
+.mobile-card-body h3{font-size:20px;margin-bottom:8px}
+.mobile-card-body p{font-size:14px;color:#555;line-height:1.6;margin-bottom:16px}
+
 .view{display:inline-flex;background:#0e1628;color:#fff;padding:13px 18px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase}
 
 .project-links{
@@ -144,6 +159,8 @@ h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-heig
   .actions{flex-direction:column;align-items:flex-start}
   .btn{min-width:250px}
   .project-links,.problem-grid,.feature-grid,.step-grid,.includes{grid-template-columns:1fr}
+  .desktop-showcase{display:none}
+  .mobile-portfolio{display:block}
   .section{padding:62px 0}
   .price{font-size:62px}
   .cta-box{grid-template-columns:1fr;padding:34px}
@@ -222,11 +239,46 @@ h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-heig
       <p class="lead">Cafe, spa, perfume dan produk makanan. Semua contoh ini boleh dibuka sebagai demo live.</p>
     </div>
 
-    <div class="showcase">
+    <div class="showcase desktop-showcase">
       <img src="assets/demo-grid.webp" alt="Contoh website SME">
     </div>
 
-    <div class="button-row">
+    <div class="mobile-portfolio">
+      <div class="mobile-card">
+        <img src="assets/demo-noir.webp" alt="Noir Coffee">
+        <div class="mobile-card-body">
+          <h3>Noir Coffee</h3>
+          <p>Demo website cafe premium.</p>
+          <a class="view" href="https://multirichresources.github.io/noircoffee/" target="_blank">View Demo</a>
+        </div>
+      </div>
+      <div class="mobile-card">
+        <img src="assets/demo-aurelia.webp" alt="Aurelia Spa">
+        <div class="mobile-card-body">
+          <h3>Aurelia Spa</h3>
+          <p>Demo website spa muslimah.</p>
+          <a class="view" href="https://multirichresources.github.io/aureliaspa/" target="_blank">View Demo</a>
+        </div>
+      </div>
+      <div class="mobile-card">
+        <img src="assets/demo-zahra.webp" alt="Zahra Perfume">
+        <div class="mobile-card-body">
+          <h3>Zahra Perfume</h3>
+          <p>Demo website brand perfume.</p>
+          <a class="view" href="https://multirichresources.github.io/zahraperfume/" target="_blank">View Demo</a>
+        </div>
+      </div>
+      <div class="mobile-card">
+        <img src="assets/demo-aina.webp" alt="Aina Sambal">
+        <div class="mobile-card-body">
+          <h3>Aina Sambal</h3>
+          <p>Demo website produk makanan.</p>
+          <a class="view" href="https://multirichresources.github.io/ainahomemadesambal/" target="_blank">View Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-row desktop-showcase">
       <a class="view" href="https://multirichresources.github.io/noircoffee/" target="_blank">Noir Coffee</a>
       <a class="view" href="https://multirichresources.github.io/zahraperfume/" target="_blank">Zahra Perfume</a>
       <a class="view" href="https://multirichresources.github.io/aureliaspa/" target="_blank">Aurelia Spa</a>
@@ -241,11 +293,38 @@ h1{font-family:"Playfair Display",serif;font-size:clamp(48px,7vw,82px);line-heig
       <p class="lead">Contoh projek website latihan, kursus dan platform akademi.</p>
     </div>
 
-    <div class="showcase">
+    <div class="showcase desktop-showcase">
       <img src="assets/coe-grid.webp" alt="Contoh website kursus COE">
     </div>
 
-    <div class="button-row">
+    <div class="mobile-portfolio">
+      <div class="mobile-card">
+        <img src="assets/coe-akademi.webp" alt="akademicoe.info">
+        <div class="mobile-card-body">
+          <h3>akademicoe.info</h3>
+          <p>Website korporat dan informasi latihan TVET.</p>
+          <a class="view" href="https://akademicoe.info" target="_blank">View Website</a>
+        </div>
+      </div>
+      <div class="mobile-card">
+        <img src="assets/coe-academy.webp" alt="academycoe.com">
+        <div class="mobile-card-body">
+          <h3>academycoe.com</h3>
+          <p>Platform pembelajaran online fokus kemahiran masa depan.</p>
+          <a class="view" href="https://academycoe.com" target="_blank">View Website</a>
+        </div>
+      </div>
+      <div class="mobile-card">
+        <img src="assets/coe-course.webp" alt="coecourse.com">
+        <div class="mobile-card-body">
+          <h3>coecourse.com</h3>
+          <p>Platform kursus online pelbagai kursus dan kategori.</p>
+          <a class="view" href="https://coecourse.com" target="_blank">View Website</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-row desktop-showcase">
       <a class="view" href="https://akademicoe.info" target="_blank">akademicoe.info</a>
       <a class="view" href="https://academycoe.com" target="_blank">academycoe.com</a>
       <a class="view" href="https://coecourse.com" target="_blank">coecourse.com</a>
