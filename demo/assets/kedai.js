@@ -23,6 +23,12 @@
     return '<svg viewBox="0 0 100 100" aria-hidden="true">' + svg + '</svg>';
   }
 
+  function vis(p, eager) {
+    var a = art(p.shape, p.color);
+    if (!p.img) return a;
+    return '<img src="' + p.img + '" alt="' + esc(p.name) + '" width="800" height="800"' + (eager ? '' : ' loading="lazy"') + ' decoding="async" onerror="this.outerHTML=this.dataset.f" data-f=\'' + a.replace(/'/g, '&#39;') + '\'>';
+  }
+
   var cart = {};
   try { cart = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { cart = {}; }
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (e) {} }
@@ -51,9 +57,9 @@
       '<div><div class="kicker">' + esc(K.hero.kicker) + '</div><h1>' + K.hero.title + '</h1><p>' + esc(K.hero.sub) + '</p>' +
       '<div class="ctas"><a class="btn btn-primary" href="#shop">Shop Now</a><a class="btn btn-ghost" href="#tentang">Tentang Kami</a></div></div>' +
       '<div class="hero-art" aria-hidden="true">' +
-        '<div class="prod p1" style="background:' + hp[0].bg + '">' + art(hp[0].shape, hp[0].color) + '</div>' +
-        '<div class="prod p2" style="background:' + hp[1].bg + '">' + art(hp[1].shape, hp[1].color) + '</div>' +
-        '<div class="prod p3" style="background:' + hp[2].bg + '">' + art(hp[2].shape, hp[2].color) + '</div>' +
+        '<div class="prod p1" style="background:' + hp[0].bg + '">' + vis(hp[0], true) + '</div>' +
+        '<div class="prod p2" style="background:' + hp[1].bg + '">' + vis(hp[1], true) + '</div>' +
+        '<div class="prod p3" style="background:' + hp[2].bg + '">' + vis(hp[2], true) + '</div>' +
       '</div>' +
     '</div></section>' +
     '<section class="trust" aria-label="Kelebihan"><div class="wrap">' +
@@ -79,7 +85,7 @@
   var grid = document.getElementById('grid');
   function renderGrid(cat) {
     grid.innerHTML = K.products.filter(function (p) { return cat === 'Semua' || p.cat === cat; }).map(function (p) {
-      return '<article class="pcard"><div class="pimg" style="background:' + p.bg + '">' + (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') + art(p.shape, p.color) + '</div>' +
+      return '<article class="pcard"><div class="pimg" style="background:' + p.bg + '">' + vis(p) + (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') + '</div>' +
         '<div class="pbody"><div class="pname">' + esc(p.name) + '</div><div class="pdesc">' + esc(p.desc) + '</div>' +
         '<div class="pprice"><b>' + rm(p.price) + '</b>' + (p.old ? '<s>' + rm(p.old) + '</s>' : '') + '</div>' +
         '<div class="add"><button class="btn btn-dark" data-add="' + p.id + '">Tambah ke Troli</button></div></div></article>';
@@ -109,7 +115,7 @@
 
   /* ---------- cart drawer ---------- */
   var drawer = document.getElementById('drawer'), overlay = document.getElementById('overlay'), lines = document.getElementById('lines');
-  function openCart() { drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock'); }
+  function openCart() { toastEl.classList.remove('show'); drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock'); }
   function closeAll() { drawer.classList.remove('open'); overlay.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); modal.classList.remove('open'); document.body.classList.remove('lock'); }
   document.getElementById('cartBtn').addEventListener('click', openCart);
   document.getElementById('closeCart').addEventListener('click', closeAll);
@@ -121,7 +127,7 @@
     var ids = Object.keys(cart).filter(function (k) { return cart[k] > 0 && byId(k); });
     lines.innerHTML = ids.length ? ids.map(function (k) {
       var p = byId(k);
-      return '<div class="line"><div class="thumb" style="background:' + p.bg + '">' + art(p.shape, p.color) + '</div><div class="info"><b>' + esc(p.name) + '</b><span>' + rm(p.price) + '</span>' +
+      return '<div class="line"><div class="thumb" style="background:' + p.bg + '">' + vis(p) + '</div><div class="info"><b>' + esc(p.name) + '</b><span>' + rm(p.price) + '</span>' +
         '<div class="qty"><button data-q="-1" data-id="' + k + '" aria-label="Kurang">−</button><em>' + cart[k] + '</em><button data-q="1" data-id="' + k + '" aria-label="Tambah">+</button></div></div>' +
         '<div class="lt">' + rm(p.price * cart[k]) + '</div></div>';
     }).join('') : '<div class="empty">Troli masih kosong.<br>Pilih produk kegemaran anda.</div>';
