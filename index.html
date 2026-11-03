@@ -123,6 +123,11 @@ h2{font-size:34px}
 .toast span{font-size:11px;color:var(--muted2)}
 .toast .long{display:none}
 
+.screen .shot,.phone-screen .shot{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.phone-screen{position:relative}
+.b-shot{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center}
+.mock::after{content:"";position:absolute;inset:auto 10% -20px;height:60px;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);z-index:-1}
+
 /* value */
 .value{background:var(--bg)}
 .value .glow{left:50%;top:380px;width:1000px;height:600px;margin-left:-500px;background:radial-gradient(closest-side,rgba(201,162,75,.12),rgba(201,162,75,0) 70%)}
@@ -166,7 +171,8 @@ h2{font-size:34px}
 .card.live{border-color:rgba(227,192,111,.55)}
 .card-prev{padding:20px 20px 0;background:rgba(255,255,255,.02)}
 .card.live .card-prev{background:linear-gradient(160deg,rgba(201,162,75,.16),rgba(201,162,75,.02))}
-.browser{border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 -10px 40px rgba(0,0,0,.35)}
+.card-prev{flex:1;display:flex;flex-direction:column}
+.browser{flex:1;border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 -10px 40px rgba(0,0,0,.35)}
 .b-bar{display:none;align-items:center;gap:6px;padding:10px 14px}
 .b-bar i{width:9px;height:9px;border-radius:50%}
 .b-bar span{margin-left:12px;padding:3px 12px;border-radius:6px;font-size:10px}
@@ -307,7 +313,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
   .hero-copy{gap:28px;max-width:600px}
   .badge{font-size:13px;padding:9px 16px;letter-spacing:1.8px}
   .badge i{width:7px;height:7px}
-  .hero h1{font-size:62px;line-height:1.08;letter-spacing:-.5px}
+  .hero h1{font-size:56px;line-height:1.08;letter-spacing:-.5px}
   .hero p{font-size:20px}
   .hero-ctas{flex-direction:row;gap:16px;padding-top:8px}
   .hero-ctas{flex-wrap:wrap}.hero-ctas .btn{min-height:64px;padding:0 28px;font-size:17px}
@@ -498,38 +504,12 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
     <div class="mock" role="img" aria-label="Contoh website kedai online di laptop dan telefon">
       <div class="laptop">
         <div class="laptop-screen">
-          <div class="screen">
-            <div class="scr-top">
-              <b>Kedai Anda</b>
-              <div class="links"><span>Produk</span><span>Promo</span><span>Tentang</span></div>
-              <span class="cart">Troli (2)</span>
-            </div>
-            <div class="scr-banner">
-              <div class="t"><small>KOLEKSI BARU</small><b>Beli terus, tanpa platform</b></div>
-              <span class="shop">Shop Now</span>
-            </div>
-            <div class="scr-grid">
-              <div class="p"><div class="img" style="background:#E9DCC4"></div><span class="n">Produk 01</span><span class="pr">RM 49.00</span></div>
-              <div class="p"><div class="img" style="background:#D9C9AE"></div><span class="n">Produk 02</span><span class="pr">RM 59.00</span></div>
-              <div class="p"><div class="img" style="background:#CDD4E2"></div><span class="n">Produk 03</span><span class="pr">RM 35.00</span></div>
-              <div class="p"><div class="img" style="background:#E4D3BE"></div><span class="n">Produk 04</span><span class="pr">RM 79.00</span></div>
-            </div>
-          </div>
+          <div class="screen"><img class="shot" src="assets/preview/hero-laptop.webp" alt="" width="1200" height="750" fetchpriority="high"></div>
         </div>
         <div class="laptop-base"></div>
       </div>
       <div class="phone">
-        <div class="phone-screen">
-          <div class="notch"><i></i></div>
-          <div class="ph-img"></div>
-          <div class="ph-info">
-            <small>BEST SELLER</small>
-            <b>Produk 01</b>
-            <span>RM 49.00</span>
-            <div class="ph-sizes"><em>S</em><em class="on">M</em><em>L</em></div>
-          </div>
-          <div class="ph-buy">Beli Sekarang</div>
-        </div>
+        <div class="phone-screen"><img class="shot" src="assets/preview/hero-phone.webp" alt="" width="500" height="1082"></div>
       </div>
       <div class="toast">
         <div class="ic"><svg width="16" height="16" style="color:#25D366" aria-hidden="true"><use href="#i-check"/></svg></div>
@@ -647,10 +627,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
       <article class="card t-hijab">
         <div class="card-prev"><div class="browser">
           <div class="b-bar"><i></i><i></i><i></i><span>websitesme.my/demo/hijab</span></div>
-          <div class="b-nav"><b>Nur Hijab Studio</b><span>Koleksi · Promo · Troli</span></div>
-          <div class="b-hero"><small>KOLEKSI RAYA</small><b>Bawal Premium</b></div>
-          <div class="b-prods"><i></i><i></i><i></i></div>
-        </div></div>
+          <img class="b-shot" src="assets/preview/port-hijab.webp" alt="Preview kedai demo hijab" width="1000" height="625" loading="lazy"></div></div>
         <div class="card-info">
           <div>
             <div class="card-title"><h3>Nur Hijab Studio</h3><span class="pill demo">DEMO</span></div>
@@ -663,10 +640,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
       <article class="card t-skin">
         <div class="card-prev"><div class="browser">
           <div class="b-bar"><i></i><i></i><i></i><span>websitesme.my/demo/skincare</span></div>
-          <div class="b-nav"><b>Glow Skin Lab</b><span>Produk · Combo · Troli</span></div>
-          <div class="b-hero"><small>BEST SELLER</small><b>Serum Combo Set</b></div>
-          <div class="b-prods"><i></i><i></i><i></i></div>
-        </div></div>
+          <img class="b-shot" src="assets/preview/port-skincare.webp" alt="Preview kedai demo skincare" width="1000" height="625" loading="lazy"></div></div>
         <div class="card-info">
           <div>
             <div class="card-title"><h3>Glow Skin Lab</h3><span class="pill demo">DEMO</span></div>
@@ -679,10 +653,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
       <article class="card t-kerepek">
         <div class="card-prev"><div class="browser">
           <div class="b-bar"><i></i><i></i><i></i><span>websitesme.my/demo/kerepek</span></div>
-          <div class="b-nav"><b>Kerepek Mak Long</b><span>Menu · Borong · Troli</span></div>
-          <div class="b-hero"><small>RESEPI KAMPUNG</small><b>Kerepek Pedas Viral</b></div>
-          <div class="b-prods"><i></i><i></i><i></i></div>
-        </div></div>
+          <img class="b-shot" src="assets/preview/port-kerepek.webp" alt="Preview kedai demo kerepek" width="1000" height="625" loading="lazy"></div></div>
         <div class="card-info">
           <div>
             <div class="card-title"><h3>Kerepek Mak Long</h3><span class="pill demo">DEMO</span></div>
