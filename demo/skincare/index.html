@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Skin Lab — Demo Kedai oleh WEBSITESME</title>
+<meta name="description" content="Demo kedai online skincare oleh WEBSITESME. Cuba cart dan checkout.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1E4A41">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/kedai.css">
+<style>
+:root{
+  --brand:#1E4A41;--brand-ink:#F2FAF7;--accent:#BFE3D6;
+  --bg:#F6F9F8;--surface:#FFFFFF;--soft:#E7F0ED;--line:#DFE9E5;
+  --text:#14231F;--muted:#5A6D68;
+  --hero-bg:#1E4A41;--hero-text:#F2FAF7;--hero-kicker:#9FD6C3;
+  --display:'DM Serif Display',Georgia,serif;
+  --radius:20px;
+}
+.k-hero h1,.shop-head h2,.about h2{font-weight:400}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+window.KEDAI = {
+  slug: 'skincare',
+  name: 'Glow Skin Lab',
+  hero: {
+    kicker: 'Best Seller TikTok',
+    title: 'Kulit Sihat,<br>Glow Semula Jadi',
+    sub: 'Rutin skincare ringkas 3 langkah dengan bahan mesra kulit. Sesuai untuk kulit sensitif dan cuaca panas Malaysia.'
+  },
+  trust: [
+    { icon: 'truck', title: 'Hantar seluruh Malaysia', text: 'Pos dalam 24 jam bekerja' },
+    { icon: 'lock', title: 'Bayaran selamat', text: 'FPX & kad debit/kredit' },
+    { icon: 'chat', title: 'Konsultasi percuma', text: 'Tanya jenis kulit di WhatsApp' }
+  ],
+  shopTitle: 'Rutin Glow Anda',
+  categories: ['Cleanser', 'Serum', 'Moisturizer', 'Set'],
+  shipping: 7,
+  products: [
+    { id: 's1', name: 'Serum Combo Set', cat: 'Set', price: 129, old: 159, badge: 'BEST SELLER', desc: 'Niacinamide + Vitamin C untuk 30 hari.', shape: 'box', color: '#2F6F62', bg: '#D6E6E1' },
+    { id: 's2', name: 'Gentle Gel Cleanser', cat: 'Cleanser', price: 39, desc: 'Pembersih pH seimbang, tak kering.', shape: 'tube', color: '#9CC2B7', bg: '#E8F1EE' },
+    { id: 's3', name: 'Niacinamide 10% Serum', cat: 'Serum', price: 59, badge: 'VIRAL', desc: 'Bantu kecilkan liang pori & minyak.', shape: 'bottle', color: '#3F8576', bg: '#DCEBE6' },
+    { id: 's4', name: 'Vitamin C Bright Serum', cat: 'Serum', price: 65, desc: 'Ratakan tona kulit & kesan jerawat.', shape: 'bottle', color: '#E2B65C', bg: '#F5EEDC' },
+    { id: 's5', name: 'Water Cream Moisturizer', cat: 'Moisturizer', price: 55, desc: 'Ringan, cepat serap, tak melekit.', shape: 'jar', color: '#BFD6CF', bg: '#EEF4F2' },
+    { id: 's6', name: 'Barrier Repair Cream', cat: 'Moisturizer', price: 69, desc: 'Ceramide untuk kulit sensitif.', shape: 'jar', color: '#7FAA9D', bg: '#E3EEEA' },
+    { id: 's7', name: 'Foam Cleanser Rice', cat: 'Cleanser', price: 35, old: 42, desc: 'Buih lembut dengan ekstrak beras.', shape: 'tube', color: '#E8DCC8', bg: '#F6F1E8' },
+    { id: 's8', name: 'Starter Kit 3 Langkah', cat: 'Set', price: 99, badge: 'JIMAT', desc: 'Cleanser, serum & moisturizer saiz travel.', shape: 'box', color: '#9CC2B7', bg: '#E1EDE9' }
+  ],
+  about: {
+    title: 'Ringkas, Jujur, Sesuai Kulit Tropika',
+    text: 'Kami percaya skincare tak perlu 10 langkah. Glow Skin Lab fokus pada formula ringkas yang berkesan — setiap produk diuji untuk kulit dalam cuaca lembap dan panas.'
+  }
+};
+</script>
+<script src="../assets/kedai.js"></script>
+</body>
+</html>

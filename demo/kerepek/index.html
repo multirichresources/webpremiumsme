@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerepek Mak Long — Demo Kedai oleh WEBSITESME</title>
+<meta name="description" content="Demo kedai online makanan & snek oleh WEBSITESME. Cuba cart dan checkout.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A2E0E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/kedai.css">
+<style>
+:root{
+  --brand:#7A2E0E;--brand-ink:#FFF6EA;--accent:#F4B544;
+  --bg:#FFF9F0;--surface:#FFFFFF;--soft:#FBEBD3;--line:#F1E2CB;
+  --text:#2E1A0E;--muted:#7A6050;
+  --hero-bg:linear-gradient(140deg,#B4541C 0%,#7A2E0E 100%);--hero-text:#FFF6EA;--hero-kicker:#FFD27A;
+  --display:'Fraunces',Georgia,serif;
+}
+.k-hero h1,.shop-head h2,.about h2{font-weight:800}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+window.KEDAI = {
+  slug: 'kerepek',
+  name: 'Kerepek Mak Long',
+  hero: {
+    kicker: 'Resepi Kampung Sejak 1998',
+    title: 'Rangup, Pedas,<br>Tak Boleh Berhenti',
+    sub: 'Kerepek dan snek buatan tangan, digoreng setiap minggu dalam kuali besar. Sesuai untuk minum petang, majlis dan buah tangan.'
+  },
+  trust: [
+    { icon: 'truck', title: 'Pos seluruh Malaysia', text: 'Bungkus kedap udara, sampai rangup' },
+    { icon: 'lock', title: 'Bayaran selamat', text: 'FPX & kad debit/kredit' },
+    { icon: 'chat', title: 'Order borong', text: 'Harga khas untuk agen & majlis' }
+  ],
+  shopTitle: 'Menu Mak Long',
+  categories: ['Kerepek', 'Snek', 'Combo'],
+  shipping: 9,
+  products: [
+    { id: 'k1', name: 'Kerepek Pisang Pedas Viral', cat: 'Kerepek', price: 15, old: 18, badge: 'VIRAL', desc: 'Pisang tanduk, salut serbuk cili.', shape: 'pack', color: '#D98C4A', bg: '#FBE3C4' },
+    { id: 'k2', name: 'Kerepek Ubi Masin', cat: 'Kerepek', price: 12, desc: 'Ubi kayu nipis, rasa masin klasik.', shape: 'pack', color: '#E9B27A', bg: '#FCEBD5' },
+    { id: 'k3', name: 'Kerepek Bayam Rangup', cat: 'Kerepek', price: 14, desc: 'Daun bayam bersalut tepung rempah.', shape: 'pack', color: '#7C9A4B', bg: '#EEF1DD' },
+    { id: 'k4', name: 'Kacang Parpu Goreng', cat: 'Snek', price: 10, desc: 'Kacang dhal goreng bawang & cili.', shape: 'jar', color: '#F4B544', bg: '#FDF0D2' },
+    { id: 'k5', name: 'Rempeyek Kacang', cat: 'Snek', price: 13, badge: 'BARU', desc: 'Rangup nipis, penuh kacang tanah.', shape: 'jar', color: '#C9864A', bg: '#F8E6D2' },
+    { id: 'k6', name: 'Maruku Pedas', cat: 'Snek', price: 11, desc: 'Maruku sederhana pedas, wangi jintan.', shape: 'jar', color: '#B4541C', bg: '#F6DCC8' },
+    { id: 'k7', name: 'Combo Minum Petang (4 pek)', cat: 'Combo', price: 45, old: 54, badge: 'JIMAT', desc: 'Pilihan Mak Long 4 perisa popular.', shape: 'box', color: '#B4541C', bg: '#FBE3C4' },
+    { id: 'k8', name: 'Balang Raya Besar', cat: 'Combo', price: 39, desc: 'Balang 1kg campuran, cantik untuk tetamu.', shape: 'jar', color: '#7A2E0E', bg: '#F4DCCB' }
+  ],
+  about: {
+    title: 'Dari Dapur Mak Long ke Rumah Anda',
+    text: 'Bermula dengan jualan di pasar malam, kini Mak Long hantar ke seluruh Malaysia. Resepi masih sama — minyak sawit segar, rempah tumbuk sendiri, dan digoreng dalam kuantiti kecil supaya sentiasa rangup.'
+  }
+};
+</script>
+<script src="../assets/kedai.js"></script>
+</body>
+</html>
