@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Owner — Demo oleh WEBSITESME</title>
+<meta name="description" content="Demo dashboard owner kedai online: order, stok, customer dan promo dalam satu tempat.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#5E3A45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --bg:#F6F3F1;--panel:#FFFFFF;--panel2:#FBF8F6;--line:#ECE4E0;--line2:#DED3CE;
+  --ink:#24181C;--muted:#6E5F65;--dim:#8F8086;
+  --brand:#5E3A45;--brand-ink:#FFF7F5;--soft:#F4E9E6;
+  --ok:#1F8A4C;--ok-bg:#E6F4EC;--warn:#B7791F;--warn-bg:#FDF3E1;--ship:#2F6FB3;--ship-bg:#E7F0FA;--bad:#C2453A;--bad-bg:#FBE9E7;
+  --gold:#C9A24B;
+  --display:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.demo-bar{background:#0A1224;color:#F5F1E8;font-size:12px;text-align:center;padding:9px 16px;line-height:1.4}
+.demo-bar a{color:#E3C06F;font-weight:600;text-decoration:none;white-space:nowrap}
+
+/* topbar */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand b{font-family:var(--display);font-size:22px;color:var(--brand);white-space:nowrap}
+.brand span{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);background:var(--soft);padding:4px 9px;border-radius:999px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border-radius:11px;border:1px solid var(--line2);background:var(--panel);font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--brand)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.primary:hover{background:#4A2D37}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px;border-radius:9px}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
+.hide-sm{display:none}
+
+/* tabs */
+.tabs{background:var(--panel);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;display:flex;align-items:center;gap:8px;height:52px;padding:0 14px;border:0;background:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer}
+.tab[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.tab svg{flex:none}
+.tier{font-size:10px;font-weight:800;letter-spacing:.8px;padding:2px 7px;border-radius:999px;background:#F6EEDA;color:#7A5A12}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:20px 0 6px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}
+.stat .k{font-size:11.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--dim)}
+.stat .v{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.5px}
+.stat .s{font-size:12.5px;color:var(--muted);margin-top:2px}
+.stat .s.up{color:var(--ok);font-weight:600}
+.stat.alert{border-color:#EBCB8B;background:linear-gradient(180deg,var(--warn-bg),#fff 75%)}
+.stat.alert .v{color:var(--warn)}
+
+/* chart */
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px}
+.chart-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.chart-head h3{font-size:15px;font-weight:700}
+.chart-head span{font-size:13px;color:var(--muted)}
+.bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:140px}
+.bar{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bar i{display:block;width:100%;max-width:44px;border-radius:8px 8px 4px 4px;background:var(--soft)}
+.bar.today i{background:var(--brand)}
+.bar b{font-size:11px;font-weight:600;color:var(--muted)}
+.bar em{font-style:normal;font-size:10.5px;color:var(--dim)}
+
+/* toolbar */
+.toolbar{display:flex;flex-direction:column;gap:12px;padding:20px 0 14px}
+.seg{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:4px;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;border:0;background:transparent;border-radius:10px;min-height:38px;padding:0 12px;color:var(--muted);font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--soft);color:var(--brand)}
+.seg .n{font-size:12px;background:var(--bg);border-radius:20px;padding:0 7px;min-width:22px;text-align:center}
+.seg .n.hot{background:var(--warn);color:#fff}
+.tools{display:flex;gap:8px}
+.tools input{flex:1;min-width:0;min-height:42px;padding:0 13px;border:1px solid var(--line2);border-radius:11px;background:var(--panel)}
+
+/* orders */
+.list{display:flex;flex-direction:column;gap:12px;padding-bottom:40px}
+.order{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.o-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.oid{font-weight:700;letter-spacing:.3px}
+.when{font-size:13px;color:var(--muted)}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;margin-left:6px}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.b-paid{color:var(--warn);background:var(--warn-bg)}
+.b-shipped{color:var(--ship);background:var(--ship-bg)}
+.b-pending{color:var(--muted);background:#F1ECEA}
+.b-done{color:var(--ok);background:var(--ok-bg)}
+.o-body{display:grid;grid-template-columns:1fr}
+.o-body>section{padding:14px 16px;min-width:0}
+.o-body>section+section{border-top:1px solid var(--line)}
+.lbl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.items{list-style:none;font-size:14px}
+.items li{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.items li img{width:38px;height:38px;border-radius:8px;object-fit:cover;flex:none}
+.items li span{flex:1;min-width:0}
+.items li .q{color:var(--muted)}
+.sum{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);padding-top:7px}
+.sum.total{color:var(--ink);font-weight:700;font-size:15px}
+.pay{font-size:12.5px;color:var(--muted);margin-top:4px}
+.addr{font-size:14px;line-height:1.55;white-space:pre-line}
+.addr b{display:block}
+.row-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ship{display:flex;flex-direction:column;gap:9px}
+.ship input{min-height:42px;padding:0 12px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);width:100%}
+.ship .trk{font-weight:700}
+.muted{color:var(--muted);font-size:13.5px}
+.empty{background:var(--panel);border:1px dashed var(--line2);border-radius:16px;padding:40px 20px;text-align:center;color:var(--muted)}
+
+/* products */
+.p-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:22px 0 14px}
+.p-head h2{font-size:20px;font-weight:800}
+.p-head p{font-size:13.5px;color:var(--muted)}
+.plist{display:grid;grid-template-columns:1fr;gap:10px;padding-bottom:40px}
+.prow{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.prow img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.prow b{display:block;font-size:14.5px;line-height:1.3}
+.prow small{font-size:12.5px;color:var(--muted)}
+.stock{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:12.5px;font-weight:600}
+.stock.low{color:var(--bad)}
+.stock.ok{color:var(--ok)}
+.stepper{display:flex;align-items:center;gap:2px}
+.stepper button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line2);background:var(--panel);font-size:17px;line-height:1;cursor:pointer}
+.stepper em{font-style:normal;min-width:30px;text-align:center;font-weight:700;font-size:14px}
+.p-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.switch{position:relative;width:44px;height:26px;border-radius:999px;border:0;background:#D8CDC9;cursor:pointer;flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch[aria-checked=true]{background:var(--ok)}
+.switch[aria-checked=true]::after{left:21px}
+
+/* customers */
+.clist{display:grid;grid-template-columns:1fr;gap:10px;padding-bottom:40px}
+.crow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
+.crow .ini{width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:800}
+.crow b{display:block;font-size:14.5px}
+.crow small{display:block;font-size:12.5px;color:var(--muted)}
+.crow .spent{text-align:right}
+.crow .spent b{color:var(--brand)}
+.tag-vip{font-size:10px;font-weight:800;letter-spacing:.6px;padding:2px 7px;border-radius:999px;background:#F6EEDA;color:#7A5A12;margin-left:6px;vertical-align:middle}
+
+/* promo */
+.promo-form{display:grid;grid-template-columns:1fr;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.promo-form label{font-size:12.5px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.promo-form input,.promo-form select{min-height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);text-transform:none}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;letter-spacing:1px;background:var(--soft);color:var(--brand);padding:4px 10px;border-radius:8px;font-size:14px}
+.prmrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.prmrow .meta{font-size:13px;color:var(--muted)}
+
+.lock-note{display:flex;gap:10px;align-items:flex-start;background:#FBF6EA;border:1px solid #EAD9AE;border-radius:14px;padding:12px 14px;font-size:13.5px;color:#6B5216;margin-top:18px}
+.lock-note svg{flex:none;margin-top:2px}
+
+.toast{position:fixed;left:50%;bottom:24px;z-index:90;transform:translate(-50%,16px);opacity:0;padding:12px 18px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;transition:all .25s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (min-width:700px){
+  .wrap{padding:0 28px}
+  .hide-sm{display:inline-flex}
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .stat .v{font-size:30px}
+  .toolbar{flex-direction:row;align-items:center;justify-content:space-between}
+  .tools input{width:240px;flex:none}
+  .plist,.clist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promo-form{grid-template-columns:1fr 1fr 1fr auto;align-items:end}
+}
+@media (min-width:1000px){
+  .o-body{grid-template-columns:1.2fr 1fr .9fr}
+  .o-body>section+section{border-top:0;border-left:1px solid var(--line)}
+  .dash-top{display:grid;grid-template-columns:1fr 380px;gap:14px;align-items:stretch}
+  .dash-top .stats{grid-template-columns:repeat(2,minmax(0,1fr));padding:20px 0 0}
+  .dash-top .chart{margin-top:20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Ini <b>DEMO</b> dashboard owner — data contoh. Cuba tandakan order dipos &amp; export CSV. <a href="/#pakej">Lihat pakej →</a></div>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><b>Nur Hijab Studio</b><span>Dashboard</span></div>
+    <div class="top-actions">
+      <a class="btn sm hide-sm" href="../hijab/">Lihat Kedai</a>
+      <div class="avatar" aria-label="Akaun owner">NH</div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Bahagian dashboard">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="order"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.8l2-8H6.3"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>Order</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="produk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Produk &amp; Stok</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="customer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg>Customer <span class="tier">ELITE</span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="promo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Kod Promo <span class="tier">ELITE</span></button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ORDER -->
+  <section id="p-order" role="tabpanel">
+    <div class="dash-top">
+      <div class="stats">
+        <div class="stat"><div class="k">Jualan hari ini</div><div class="v num" id="stToday">RM 0</div><div class="s up">▲ 18% dari semalam</div></div>
+        <div class="stat"><div class="k">Jualan bulan ini</div><div class="v num">RM 8,742</div><div class="s">164 order</div></div>
+        <div class="stat alert"><div class="k">Perlu pos</div><div class="v num" id="stShip">0</div><div class="s">Order dah dibayar</div></div>
+        <div class="stat"><div class="k">Customer</div><div class="v num">312</div><div class="s up">+27 bulan ini</div></div>
+      </div>
+      <div class="chart">
+        <div class="chart-head"><h3>Jualan 7 hari</h3><span class="num">RM 2,186</span></div>
+        <div class="bars" id="bars"></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="seg" id="seg" role="group" aria-label="Tapis status order"></div>
+      <div class="tools">
+        <input type="search" id="q" placeholder="Cari nama, telefon, no. order" aria-label="Cari order">
+        <button class="btn" id="exportOrders"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export CSV</button>
+      </div>
+    </div>
+    <div class="list" id="orders"></div>
+  </section>
+
+  <!-- PRODUK -->
+  <section id="p-produk" role="tabpanel" hidden>
+    <div class="p-head">
+      <div><h2>Produk &amp; Stok</h2><p>Kemas kini stok terus dari telefon. Produk stok habis auto tutup di kedai.</p></div>
+      <button class="btn primary" data-demo="Tambah produk baru — upload gambar, harga &amp; stok.">+ Tambah Produk</button>
+    </div>
+    <div class="plist" id="products"></div>
+  </section>
+
+  <!-- CUSTOMER -->
+  <section id="p-customer" role="tabpanel" hidden>
+    <div class="p-head">
+      <div><h2>Database Customer</h2><p>Semua customer yang pernah beli — milik anda, bukan milik platform.</p></div>
+      <button class="btn" id="exportCust"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Export untuk broadcast</button>
+    </div>
+    <div class="clist" id="customers"></div>
+    <div class="lock-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Database customer &amp; export tersedia dalam <b>Kedai Elite</b>.</span></div>
+  </section>
+
+  <!-- PROMO -->
+  <section id="p-promo" role="tabpanel" hidden>
+    <div class="p-head">
+      <div><h2>Kod Promo</h2><p>Buat kod diskaun untuk live TikTok, raya atau customer setia.</p></div>
+    </div>
+    <form class="promo-form" id="promoForm">
+      <label>Kod<input id="pCode" placeholder="CTH: LIVE15" maxlength="16" required></label>
+      <label>Diskaun<select id="pType"><option value="10">10%</option><option value="15">15%</option><option value="20">20%</option><option value="RM5">RM5</option><option value="RM10">RM10</option></select></label>
+      <label>Tamat<select id="pEnd"><option>7 hari</option><option>14 hari</option><option>30 hari</option></select></label>
+      <button class="btn primary" type="submit">+ Cipta Kod</button>
+    </form>
+    <div class="list" id="promos" style="gap:10px"></div>
+    <div class="lock-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Kod promo tersedia dalam <b>Kedai Elite</b>.</span></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var IMG = '../hijab/img/';
+  var P = {
+    h1:{n:'Bawal Satin Dusty Rose',p:39,stock:42,img:'h1.webp'},
+    h2:{n:'Shawl Chiffon Mocha',p:45,stock:18,img:'h2.webp'},
+    h3:{n:'Bawal Cotton Ivory',p:35,stock:56,img:'h3.webp'},
+    h4:{n:'Shawl Satin Plum',p:49,stock:3,img:'h4.webp'},
+    h5:{n:'Bawal Printed Bunga',p:42,stock:27,img:'h5.webp'},
+    h6:{n:'Shawl Jersey Sage',p:39,stock:0,img:'h6.webp'},
+    h7:{n:'Inner Tube Lycra',p:15,stock:120,img:'h7.webp'},
+    h8:{n:'Inner Ninja Cotton',p:18,stock:4,img:'h8.webp'}
+  };
+  var active = {h1:1,h2:1,h3:1,h4:1,h5:1,h6:0,h7:1,h8:1};
+  var SHIP = 8;
+  var orders = [
+    {id:'NH-1048',t:'Hari ini, 10:42 pg',st:'paid',pay:'FPX',name:'Siti Nur Aisyah',tel:'012-345 6781',addr:'No. 12, Jalan Melati 3\nTaman Melati, 53100 Kuala Lumpur',items:[['h1',2],['h7',1]],note:'Nak warna sama macam live semalam'},
+    {id:'NH-1047',t:'Hari ini, 9:15 pg',st:'paid',pay:'Kad',name:'Nurul Izzati',tel:'013-228 4410',addr:'B-3-7, Pangsapuri Seri Mutiara\nSeksyen 13, 40100 Shah Alam, Selangor',items:[['h4',1],['h8',2]]},
+    {id:'NH-1046',t:'Hari ini, 8:03 pg',st:'paid',pay:'FPX',name:'Farah Hanim',tel:'017-662 9035',addr:'Lot 88, Kampung Batu 5\n06000 Jitra, Kedah',items:[['h5',3]]},
+    {id:'NH-1045',t:'Semalam, 9:48 ptg',st:'pending',pay:'FPX',name:'Aina Sofea',tel:'011-2390 7712',addr:'No. 5, Lorong Cempaka 2\n70400 Seremban, Negeri Sembilan',items:[['h2',1],['h3',1]]},
+    {id:'NH-1044',t:'Semalam, 4:20 ptg',st:'shipped',pay:'FPX',name:'Hajar Kamaruddin',tel:'019-554 2081',addr:'No. 21, Jalan Kenari 4\nBandar Puchong Jaya, 47100 Selangor',items:[['h1',1],['h2',1],['h7',2]],trk:'JNT 6302 1184 5521'},
+    {id:'NH-1043',t:'Semalam, 11:02 pg',st:'shipped',pay:'Kad',name:'Dayang Marina',tel:'014-890 3346',addr:'No. 9, Jalan Pantai Baru\n88300 Kota Kinabalu, Sabah',items:[['h4',2]],trk:'POS ER 3391 0627 MY'},
+    {id:'NH-1042',t:'2 hari lepas',st:'done',pay:'FPX',name:'Rahimah Yusof',tel:'016-301 7754',addr:'No. 3, Jalan Seri Intan\n81200 Johor Bahru, Johor',items:[['h3',2],['h8',1]],trk:'JNT 6302 0951 1179'},
+    {id:'NH-1041',t:'2 hari lepas',st:'done',pay:'FPX',name:'Wan Nurfatihah',tel:'012-778 4402',addr:'No. 44, Taman Desa Murni\n15200 Kota Bharu, Kelantan',items:[['h5',1],['h7',3]],trk:'POS ER 3390 7712 MY'}
+  ];
+  var STATUS = {paid:['Perlu Pos','b-paid'],pending:['Belum Bayar','b-pending'],shipped:['Dipos','b-shipped'],done:['Diterima','b-done']};
+  var filter = 'all', q = '';
+
+  function rm(n){return 'RM '+n.toFixed(2);}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function sub(o){return o.items.reduce(function(a,it){return a+P[it[0]].p*it[1];},0);}
+  var toastEl=document.getElementById('toast'),tt;
+  function toast(m){toastEl.innerHTML=m;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show');},2200);}
+
+  /* tabs */
+  document.querySelector('.tabs').addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;
+    [].forEach.call(document.querySelectorAll('.tab'),function(t){t.setAttribute('aria-selected',t===b?'true':'false');});
+    ['order','produk','customer','promo'].forEach(function(k){document.getElementById('p-'+k).hidden=(k!==b.dataset.tab);});
+    window.scrollTo(0,0);
+  });
+
+  /* chart */
+  var days=[['Rab',212],['Kha',268],['Jum',341],['Sab',402],['Ahd',366],['Isn',289],['Hari ini',0]];
+  function renderBars(){
+    var today=orders.filter(function(o){return o.t.indexOf('Hari ini')===0&&o.st!=='pending';}).reduce(function(a,o){return a+sub(o)+SHIP;},0);
+    days[6][1]=Math.max(today,1);
+    var mx=Math.max.apply(null,days.map(function(d){return d[1];}));
+    document.getElementById('bars').innerHTML=days.map(function(d,i){
+      return '<div class="bar'+(i===6?' today':'')+'"><b class="num">'+Math.round(d[1])+'</b><i style="height:'+Math.max(8,d[1]/mx*100)+'px"></i><em>'+d[0]+'</em></div>';
+    }).join('');
+    document.getElementById('stToday').textContent='RM '+today.toLocaleString('en-MY');
+  }
+
+  /* orders */
+  function counts(){var c={all:orders.length,pending:0,paid:0,shipped:0,done:0};orders.forEach(function(o){c[o.st]++;});return c;}
+  function renderSeg(){
+    var c=counts();
+    var opts=[['all','Semua'],['paid','Perlu Pos'],['pending','Belum Bayar'],['shipped','Dipos'],['done','Diterima']];
+    document.getElementById('seg').innerHTML=opts.map(function(o){
+      return '<button aria-pressed="'+(filter===o[0])+'" data-f="'+o[0]+'">'+o[1]+' <span class="n'+(o[0]==='paid'&&c.paid?' hot':'')+'">'+c[o[0]]+'</span></button>';
+    }).join('');
+    document.getElementById('stShip').textContent=c.paid;
+  }
+  function renderOrders(){
+    var list=orders.filter(function(o){
+      if(filter!=='all'&&o.st!==filter)return false;
+      if(!q)return true;
+      return (o.id+' '+o.name+' '+o.tel).toLowerCase().indexOf(q)>-1;
+    });
+    var el=document.getElementById('orders');
+    if(!list.length){el.innerHTML='<div class="empty"><b>Tiada order</b>Cuba tapis lain.</div>';return;}
+    el.innerHTML=list.map(function(o){
+      var s=sub(o),S=STATUS[o.st];
+      var ship;
+      if(o.st==='paid') ship='<div class="ship"><input id="trk-'+o.id+'" placeholder="No. tracking (cth: JNT 6302…)" aria-label="No. tracking '+o.id+'"><button class="btn ok" data-ship="'+o.id+'">Tandakan Dipos</button></div>';
+      else if(o.st==='pending') ship='<p class="muted">Menunggu bayaran customer. Sistem auto kemas kini bila bayaran masuk.</p>';
+      else ship='<div class="ship"><div class="muted">'+(o.st==='done'?'Diterima customer':'Dalam perjalanan')+'</div><div class="trk num">'+esc(o.trk)+'</div></div>';
+      return '<article class="order"><div class="o-head"><div><span class="oid">'+o.id+'</span><span class="badge '+S[1]+'">'+S[0]+'</span></div><span class="when">'+o.t+'</span></div>'+
+        '<div class="o-body"><section><div class="lbl">Item</div><ul class="items">'+o.items.map(function(it){var p=P[it[0]];return '<li><img src="'+IMG+p.img+'" alt=""><span>'+esc(p.n)+' <span class="q">× '+it[1]+'</span></span><b class="num">'+rm(p.p*it[1])+'</b></li>';}).join('')+'</ul>'+
+        '<div class="sum"><span>Penghantaran</span><span class="num">'+rm(SHIP)+'</span></div><div class="sum total"><span>Jumlah</span><span class="num">'+rm(s+SHIP)+'</span></div>'+
+        '<div class="pay">'+(o.st==='pending'?'Belum dibayar':'Dibayar via '+o.pay)+'</div>'+(o.note?'<div class="pay" style="color:var(--brand);font-weight:600">Nota: '+esc(o.note)+'</div>':'')+'</section>'+
+        '<section><div class="lbl">Customer</div><div class="addr"><b>'+esc(o.name)+'</b>'+esc(o.tel)+'\n'+esc(o.addr)+'</div><div class="row-btns"><button class="btn sm" data-copy="'+o.id+'">Salin alamat</button><button class="btn sm" data-demo="Buka WhatsApp terus ke customer untuk update order.">WhatsApp</button></div></section>'+
+        '<section><div class="lbl">Penghantaran</div>'+ship+'</section></div></article>';
+    }).join('');
+  }
+  function refreshOrders(){renderSeg();renderOrders();renderBars();}
+  document.getElementById('seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;filter=b.dataset.f;refreshOrders();});
+  document.getElementById('q').addEventListener('input',function(){q=this.value.trim().toLowerCase();renderOrders();});
+  document.getElementById('orders').addEventListener('click',function(e){
+    var s=e.target.closest('[data-ship]');
+    if(s){
+      var id=s.dataset.ship,inp=document.getElementById('trk-'+id),o=orders.filter(function(x){return x.id===id;})[0];
+      o.trk=(inp&&inp.value.trim())||('JNT 6302 '+Math.floor(1000+Math.random()*8999)+' '+Math.floor(1000+Math.random()*8999));
+      o.st='shipped';refreshOrders();
+      toast('✓ '+id+' ditandakan dipos — no. tracking disimpan');
+      return;
+    }
+    var c=e.target.closest('[data-copy]');
+    if(c){
+      var o2=orders.filter(function(x){return x.id===c.dataset.copy;})[0];
+      var txt=o2.name+'\n'+o2.tel+'\n'+o2.addr;
+      try{navigator.clipboard.writeText(txt);}catch(err){}
+      toast('Alamat '+o2.id+' disalin');
+    }
+  });
+
+  function download(name,rows){
+    var csv=rows.map(function(r){return r.map(function(v){v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(',');}).join('\n');
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}));
+    a.download=name;document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+  }
+  document.getElementById('exportOrders').addEventListener('click',function(){
+    var rows=[['No. Order','Masa','Status','Nama','Telefon','Alamat','Item','Jumlah (RM)','Tracking']];
+    orders.forEach(function(o){rows.push([o.id,o.t,STATUS[o.st][0],o.name,o.tel,o.addr.replace(/\n/g,', '),o.items.map(function(it){return P[it[0]].n+' x'+it[1];}).join('; '),(sub(o)+SHIP).toFixed(2),o.trk||'']);});
+    download('order-nur-hijab-studio.csv',rows);toast('Fail CSV order dimuat turun');
+  });
+
+  /* products */
+  function renderProducts(){
+    document.getElementById('products').innerHTML=Object.keys(P).map(function(k){
+      var p=P[k],cls=p.stock===0?'low':(p.stock<=5?'low':'ok');
+      var lab=p.stock===0?'Stok habis':(p.stock<=5?'Tinggal '+p.stock+' — tambah stok':'Stok '+p.stock);
+      return '<div class="prow"><img src="'+IMG+p.img+'" alt=""><div><b>'+esc(p.n)+'</b><small class="num">'+rm(p.p)+(active[k]?' · Aktif':' · Disembunyi')+'</small><div class="stock '+cls+'">'+lab+'</div></div>'+
+        '<div class="p-actions"><button class="switch" role="switch" aria-checked="'+(!!active[k])+'" aria-label="Papar '+esc(p.n)+' di kedai" data-tog="'+k+'"></button>'+
+        '<div class="stepper"><button data-st="'+k+'" data-d="-1" aria-label="Kurang stok">−</button><em class="num">'+p.stock+'</em><button data-st="'+k+'" data-d="1" aria-label="Tambah stok">+</button></div></div></div>';
+    }).join('');
+  }
+  document.getElementById('products').addEventListener('click',function(e){
+    var t=e.target.closest('[data-tog]');
+    if(t){var k=t.dataset.tog;active[k]=active[k]?0:1;renderProducts();toast(P[k].n+(active[k]?' dipaparkan di kedai':' disembunyikan dari kedai'));return;}
+    var s=e.target.closest('[data-st]');
+    if(s){var k2=s.dataset.st;P[k2].stock=Math.max(0,P[k2].stock+parseInt(s.dataset.d,10));if(P[k2].stock>0&&!active[k2]&&parseInt(s.dataset.d,10)>0){active[k2]=1;}if(P[k2].stock===0)active[k2]=0;renderProducts();}
+  });
+
+  /* customers */
+  var cust=[
+    ['Siti Nur Aisyah','012-345 6781',9,486,'Hari ini',1],
+    ['Hajar Kamaruddin','019-554 2081',7,402,'Semalam',1],
+    ['Nurul Izzati','013-228 4410',6,318,'Hari ini',1],
+    ['Rahimah Yusof','016-301 7754',4,231,'2 hari lepas',0],
+    ['Dayang Marina','014-890 3346',3,196,'Semalam',0],
+    ['Farah Hanim','017-662 9035',3,174,'Hari ini',0],
+    ['Wan Nurfatihah','012-778 4402',2,99,'2 hari lepas',0],
+    ['Aina Sofea','011-2390 7712',1,88,'Semalam',0]
+  ];
+  document.getElementById('customers').innerHTML=cust.map(function(c){
+    var ini=c[0].split(' ').slice(0,2).map(function(w){return w[0];}).join('');
+    return '<div class="crow"><div class="ini">'+ini+'</div><div><b>'+esc(c[0])+(c[5]?'<span class="tag-vip">VIP</span>':'')+'</b><small class="num">'+c[1]+'</small><small>Terakhir beli: '+c[4]+'</small></div><div class="spent"><b class="num">RM '+c[3]+'</b><small>'+c[2]+' order</small></div></div>';
+  }).join('');
+  document.getElementById('exportCust').addEventListener('click',function(){
+    var rows=[['Nama','Telefon','Jumlah Order','Jumlah Belanja (RM)','Terakhir Beli']];
+    cust.forEach(function(c){rows.push([c[0],c[1],c[2],c[3],c[4]]);});
+    download('customer-nur-hijab-studio.csv',rows);toast('Senarai customer dimuat turun — sedia untuk broadcast');
+  });
+
+  /* promo */
+  var promos=[['RAYA20','20%','Aktif · tamat 30 Nov',37],['LIVE15','15%','Aktif · tamat 10 Nov',64],['SETIA10','RM10','Aktif · customer VIP sahaja',12],['MERDEKA','RM5','Tamat',88]];
+  function renderPromos(){
+    document.getElementById('promos').innerHTML=promos.map(function(p){
+      return '<div class="prmrow"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span class="code">'+esc(p[0])+'</span><b>'+(p[1].indexOf('RM')===0?'Diskaun '+p[1]:'Diskaun '+p[1])+'</b></div><div class="meta">'+esc(p[2])+' · digunakan '+p[3]+' kali</div></div>';
+    }).join('');
+  }
+  document.getElementById('promoForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var code=document.getElementById('pCode').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(!code)return;
+    var t=document.getElementById('pType').value;
+    promos.unshift([code,t.indexOf('RM')===0?t:t+'%','Aktif · tamat dalam '+document.getElementById('pEnd').value,0]);
+    renderPromos();this.reset();toast('Kod '+code+' aktif — customer boleh guna masa checkout');
+  });
+
+  document.addEventListener('click',function(e){var d=e.target.closest('[data-demo]');if(d)toast('Demo: '+d.getAttribute('data-demo'));});
+
+  refreshOrders();renderProducts();renderPromos();
+})();
+</script>
+</body>
+</html>

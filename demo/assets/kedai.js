@@ -167,9 +167,10 @@
       e.preventDefault();
       cart = {}; save(); update();
       sheet.innerHTML = '<div class="success"><div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></div>' +
-        '<h3>Order berjaya!</h3><p>Ini cara customer anda rasa. Dalam kedai sebenar, bayaran masuk akaun anda dan order terus muncul dalam dashboard.</p></div>' +
+        '<h3>Order berjaya!</h3><p>Ini cara customer anda rasa. Dalam kedai sebenar, bayaran masuk akaun anda dan order terus muncul dalam dashboard owner.</p></div>' +
         '<div class="actions"><a class="btn btn-wa btn-block" href="' + waLink('Hi WEBSITESME, saya dah cuba demo ' + K.name + '. Saya nak kedai macam ni!') + '" target="_blank" rel="noopener">Saya Nak Kedai Macam Ni</a>' +
-        '<button type="button" class="btn btn-ghost btn-block" id="done" style="color:var(--text)">Teruskan tengok demo</button></div>';
+        '<a class="btn btn-ghost btn-block" href="../dashboard/" style="color:var(--text)">Lihat Dashboard Owner →</a>' +
+        '<button type="button" class="btn btn-ghost btn-block" id="done" style="color:var(--text);border:0">Teruskan tengok demo</button></div>';
       document.getElementById('done').addEventListener('click', closeAll);
     });
   });
