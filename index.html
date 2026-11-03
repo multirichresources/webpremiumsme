@@ -263,7 +263,8 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
 /* final cta */
 .final{position:relative;margin:0 20px;padding:52px 24px;border-radius:26px;overflow:hidden;background:linear-gradient(150deg,#13213F 0%,#0E1A33 55%,#0A1224 100%);border:1px solid rgba(227,192,111,.4);display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
 .final .glow{left:50%;top:-160px;width:500px;height:360px;margin-left:-250px;background:radial-gradient(closest-side,rgba(201,162,75,.30),rgba(201,162,75,0) 70%)}
-.final>*{position:relative}
+.final>*:not(.glow){position:relative}
+.final>.glow{position:absolute}
 .final p{font-size:16px;line-height:1.6;color:#C9D1E0;max-width:620px}
 .final .btn{align-self:stretch;min-height:60px;font-size:17px;margin-top:8px}
 .final small{font-size:13px;line-height:1.5;color:var(--muted2)}
