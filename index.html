@@ -93,7 +93,7 @@ h2{font-size:34px}
 .mock{position:relative;height:470px}
 .laptop{position:absolute;left:0;top:20px;width:300px}
 .laptop-screen{background:#11131A;border-radius:12px 12px 4px 4px;padding:8px;border:1px solid #2A2F3D;box-shadow:0 24px 50px rgba(0,0,0,.55)}
-.screen{border-radius:5px;overflow:hidden;background:#FBF8F2;color:#1B1F2A;display:flex;flex-direction:column;height:180px}
+.screen{border-radius:5px;overflow:hidden;background:#FBF8F2;color:#1B1F2A;display:flex;flex-direction:column;aspect-ratio:1200/750}
 .scr-top{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#fff;border-bottom:1px solid #EEE7DA}
 .scr-top b{font-family:var(--serif);font-size:10px;color:var(--bg2)}
 .scr-top .cart{padding:2px 7px;border-radius:999px;background:var(--bg2);color:var(--text);font-size:7px}
@@ -313,7 +313,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
   .hero-copy{gap:28px;max-width:600px}
   .badge{font-size:13px;padding:9px 16px;letter-spacing:1.8px}
   .badge i{width:7px;height:7px}
-  .hero h1{font-size:56px;line-height:1.08;letter-spacing:-.5px}
+  .hero h1{font-size:clamp(44px,3.9vw,60px);line-height:1.08;letter-spacing:-.5px}
   .hero p{font-size:20px}
   .hero-ctas{flex-direction:row;gap:16px;padding-top:8px}
   .hero-ctas{flex-wrap:wrap}.hero-ctas .btn{min-height:64px;padding:0 28px;font-size:17px}
@@ -322,7 +322,7 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
   .mock{height:600px}
   .laptop{top:40px;width:min(600px,100%)}
   .laptop-screen{border-radius:18px 18px 6px 6px;padding:14px;box-shadow:0 40px 80px rgba(0,0,0,.55)}
-  .screen{height:360px;border-radius:8px}
+  .screen{border-radius:8px}
   .scr-top{padding:14px 20px}
   .scr-top b{font-size:16px}
   .scr-top .links{display:flex;gap:16px;font-size:10px;color:#5B6275;align-items:center}
@@ -436,11 +436,12 @@ details p{padding:0 20px 22px;font-size:15px;line-height:1.65;color:#C9D1E0}
   .footer nav a{padding:0}
   .copy{font-size:14px}
 }
-@media (min-width:1024px) and (max-width:1240px){
-  .hero h1{font-size:54px}
-  .phone{width:180px;height:380px}
-  .ph-img{height:140px}
-  .toast{right:110px}
+@media (min-width:1024px) and (max-width:1300px){
+  .mock{height:480px}
+  .laptop{top:30px}
+  .phone{top:110px;width:150px;height:320px;border-radius:28px;padding:8px}
+  .phone-screen{border-radius:21px}
+  .toast{top:380px;right:110px}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
